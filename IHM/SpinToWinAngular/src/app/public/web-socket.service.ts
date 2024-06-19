@@ -10,6 +10,8 @@ export class WebSocketService {
   private observer: Observer<any> | null = null;
   private url: string = 'ws://localhost:8888';
   private subscription: Observable<any> | null = null;
+  gameStateSubject: any;
+  chatSubject: any;
  
 
   constructor() {}
