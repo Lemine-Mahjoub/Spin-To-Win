@@ -29,7 +29,8 @@ export class RegisterComponent implements OnInit {
   }
 
   getAllEmails() {
-    const url = 'http://valentin:8000/player/mail';
+ 
+    const url = 'http://localhost:8000/player/mail'; 
     this.httpClient.get<string[]>(url).subscribe(
       (response: string[]) => {
         this.emails = response;
@@ -46,7 +47,9 @@ export class RegisterComponent implements OnInit {
   }
 
   getAllPseudo() {
-    const url = 'http://valentin:8000/player/pseudo';
+ 
+    const url = 'http://localhost:8000/player/pseudo';
+ 
     this.httpClient.get<string[]>(url).subscribe(
       (response: string[]) => {
         this.pseudos = response;
@@ -104,7 +107,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const url = 'http://valentin:8000/player/new';
+ 
+    const url = 'http://localhost:8000/player/new';
+ 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let dateNaissanceISO: string | null = null;

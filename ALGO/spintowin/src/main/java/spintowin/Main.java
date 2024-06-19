@@ -26,7 +26,7 @@ public class Main {
 
         Thread webSocketServerThread = new Thread(() -> {
             // Démarrage du serveur WebSocket
-            InetSocketAddress socketAddress = new InetSocketAddress("0.0.0.0",8888);
+            InetSocketAddress socketAddress = new InetSocketAddress(8888);
             SalonWebSocketServer salonWebSocketServer = new SalonWebSocketServer(socketAddress);
             salonWebSocketServer.start();
         });

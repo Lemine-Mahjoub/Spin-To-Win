@@ -6,9 +6,11 @@ import { Observable, Observer, EMPTY, Subject } from 'rxjs';
 })
 export class WebSocketService {
   private socket: WebSocket | null = null;
-  private gameStateSubject: Subject<any> = new Subject<any>();
-  private chatSubject: Subject<any> = new Subject<any>();
-  private url: string = 'ws://valentin:8888';
+ 
+  private observer: Observer<any> | null = null;
+  private url: string = 'ws://localhost:8888';
+  private subscription: Observable<any> | null = null;
+ 
 
   constructor() {}
 

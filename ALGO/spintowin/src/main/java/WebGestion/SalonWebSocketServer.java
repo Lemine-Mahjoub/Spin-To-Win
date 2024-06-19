@@ -26,7 +26,7 @@ public class SalonWebSocketServer extends WebSocketServer {
             public void run() {
                 changerEtatPartie();
             }
-        }, 0, 30000); // 30 secondes
+        }, 0, 25000); // 30 secondes
     }
 
     private void changerEtatPartie() {
@@ -135,8 +135,10 @@ public class SalonWebSocketServer extends WebSocketServer {
     }
 
     public static void main(String[] args) {
-        InetSocketAddress socketAddress = new InetSocketAddress("0.0.0.0", 8888);
-        SalonWebSocketServer server = new SalonWebSocketServer(socketAddress);
+ 
+        InetSocketAddress socketAddress = new InetSocketAddress(8888);
+        SalonWebSocketServer server = new SalonWebSocketServer(socketAddress); // Utiliser le port 8888
+ 
         server.start();
     }
 }

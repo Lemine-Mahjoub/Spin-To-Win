@@ -17,7 +17,9 @@ export class CreditComponent implements OnInit {
   }
 
   fetchCreditEvolution(playerId: number) {
-    this.http.get<number[]>(`http://valentin:8000/player/evolution/${playerId}`)
+ 
+    this.http.get<number[]>(`http://localhost:8000/player/evolution/${playerId}`)
+ 
       .subscribe((data: number[]) => {
         this.drawChart(data);
       });
