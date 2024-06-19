@@ -1,243 +1,277 @@
-<div class="body">
-  <div class="numéro-chauds">
-    <div class="btn" [routerLink]="['/Jeu']" style="font-weight:bold; cursor:pointer; position:absolute; background-color: (39, 255, 104,0.4);left:1px; border: 2px black solid; top:1px;">Quitter le jeu</div>
-    <div class="btn" [routerLink]="['/credit']" style="font-weight:bold; cursor:pointer; position:absolute; background-color: (39, 255, 104,0.4);right:1px; border: 2px black solid; top:1px;">Mon compte</div>
-    <p class="p-numérochaud">  Vous êtes dans le salon n ° {{ PLAYERINFO.salonNumber }}</p> 
-  </div>
-  <!--<div class="roulette-component">
-    <div class="roulette-img" [routerLink]="['/roulette']" style="cursor: pointer;">
-      <p>Lancer la roulette !</p>
-    </div>
-  </div>-->
-
-<div class="bubulle"><button (click)="getPedro()"><img src="../../../assets/image/bull.png"><p>Faîtes vos jeux !</p></button></div>
-  <div class="fond"> 
-    <div class="circle-background">
-      <div class="circle-progress" [ngStyle]="{ 'background': 'conic-gradient(#78C000 ' + progress + '%, transparent ' + progress + '%)' }">
-      </div>
-      <div class="circle-inner">
-        <div class="timer">{{ currentTime }} s</div>
-      </div>
-    </div>
-  </div>
-  
-  </div>
-  
-
-  <div class="table-component">
-    <table class="table">
-      <tbody>
-        <tr>
-          <td rowspan="3" id="0" class="O" (click)="onCellClick($event)">0</td>
-          <td id="3" class="rouge" (click)="onCellClick($event)">3</td>
-          <td id="6" class="noir" (click)="onCellClick($event)">6</td>
-          <td id="9" class="rouge" (click)="onCellClick($event)">9</td>
-          <td id="12" class="rouge" (click)="onCellClick($event)">12</td>
-          <td id="15" class="noir" (click)="onCellClick($event)">15</td>
-          <td id="18" class="rouge" (click)="onCellClick($event)">18</td>
-          <td id="21" class="rouge" (click)="onCellClick($event)">21</td>
-          <td id="24" class="noir" (click)="onCellClick($event)">24</td>
-          <td id="27" class="rouge" (click)="onCellClick($event)">27</td>
-          <td id="30" class="rouge" (click)="onCellClick($event)">30</td>
-          <td id="33" class="noir" (click)="onCellClick($event)">33</td>
-          <td id="36" class="rouge" (click)="onCellClick($event)">36</td>
-          <td id="ligne1" class="lg" (click)="onCellClick($event)">ligne1</td>
-        </tr>
-        <tr>
-          <td id="2" class="noir" (click)="onCellClick($event)">2</td>
-          <td id="5" class="rouge" (click)="onCellClick($event)">5</td>
-          <td id="8" class="noir" (click)="onCellClick($event)">8</td>
-          <td id="11" class="noir" (click)="onCellClick($event)">11</td>
-          <td id="14" class="rouge" (click)="onCellClick($event)">14</td>
-          <td id="17" class="noir" (click)="onCellClick($event)">17</td>
-          <td id="20" class="noir" (click)="onCellClick($event)">20</td>
-          <td id="23" class="rouge" (click)="onCellClick($event)">23</td>
-          <td id="26" class="noir" (click)="onCellClick($event)">26</td>
-          <td id="29" class="noir" (click)="onCellClick($event)">29</td>
-          <td id="32" class="rouge" (click)="onCellClick($event)">32</td>
-          <td id="35" class="noir" (click)="onCellClick($event)">35</td>
-          <td id="ligne2" class="lg" (click)="onCellClick($event)">ligne2</td>
-        </tr>
-        <tr>
-          <td id="1" class="rouge" (click)="onCellClick($event)">1</td>
-          <td id="4" class="noir" (click)="onCellClick($event)">4</td>
-          <td id="7" class="rouge" (click)="onCellClick($event)">7</td>
-          <td id="10" class="noir" (click)="onCellClick($event)">10</td>
-          <td id="13" class="noir" (click)="onCellClick($event)">13</td>
-          <td id="16" class="rouge" (click)="onCellClick($event)">16</td>
-          <td id="19" class="rouge" (click)="onCellClick($event)">19</td>
-          <td id="22" class="noir" (click)="onCellClick($event)">22</td>
-          <td id="25" class="rouge" (click)="onCellClick($event)">25</td>
-          <td id="28" class="noir" (click)="onCellClick($event)">28</td>
-          <td id="31" class="noir" (click)="onCellClick($event)">31</td>
-          <td id="34" class="rouge" (click)="onCellClick($event)">34</td>
-          <td id="ligne3" class="lg" (click)="onCellClick($event)">ligne3</td>
-        </tr>
-        <tr>
-          <td class="btn-bonus" (click)="toggleBonus()">Bonus<div [ngClass]="{ 'active': isBonusActive, 'inactive': !isBonusActive }">
-            {{ isBonusActive ? 'ON' : 'OFF' }}
-          </div></td>
-
-          
-          <td colspan="4" id="tiers1" class="lg" (click)="onCellClick($event)">tiers1</td>
-          <td colspan="4" id="tiers2" class="lg" (click)="onCellClick($event)">tiers2</td>
-          <td colspan="4" id="tiers3" class="lg" (click)="onCellClick($event)">tiers3</td>
-          <td class="empty"></td>
-        </tr>
-        <tr>
-          <td class="empty"></td>
-          <td colspan="2" id="low" class="lg" (click)="onCellClick($event)">low</td>
-          <td colspan="2" id="even" class="lg" (click)="onCellClick($event)">even</td>
-          <td colspan="2" id="red" class="rouge" (click)="onCellClick($event)">red</td>
-          <td colspan="2" id="black" class="noir" (click)="onCellClick($event)">black</td>
-          <td colspan="2" id="odd" class="lg" (click)="onCellClick($event)">odd</td>
-          <td colspan="2" id="high" class="lg" (click)="onCellClick($event)">high</td>
-          <td class="empty"></td>
-        </tr>
-      </tbody>
-    </table>
-
-
-
-    <div class="select1">
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(1, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle1" />
-        <!-- Segments -->
-        <g class="segments1">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="62" text-anchor="middle" class="chip-number">1</text>
-      </svg>
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(5, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle2" />
-        <!-- Segments -->
-        <g class="segments2">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="62" text-anchor="middle" class="chip-number">5</text>
-      </svg>
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(10, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle3" />
-        <!-- Segments -->
-        <g class="segments3">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="62" text-anchor="middle" class="chip-number">10</text>
-      </svg>
-    </div>
-    <div class="btn-option">
-
-      <button class="back-button" (click)="onUndoLastAction()" ><img src="../../../assets/image/back.png" class="btn-im"><h2> &nbsp;Annuler <br>&nbsp;le dernier<br>&nbsp;placement</h2></button>
-      <button class="back-button" (click)="onRemoveAllTokens()"><img src="../../../assets/image/annul.png" class="btn-im"><h2>&nbsp;&nbsp;Annuler<br>&nbsp;tous les <br>paris</h2></button>
-      <button class="replay-button" (click)="onReplayLastBet()">
-        <img src="../../../assets/image/rejouer.png" class="btn-im">
-        <h2>Rejouer <br> le pari <br> précédent</h2>
-      </button>
+  <div class="body">
+    <div class="numéro-chauds" style="position: relative;">
+      <div class="btn" [routerLink]="['/Jeu']" style="font-weight:bold; cursor:pointer; position:absolute; background-color: rgba(39, 255, 104, 0.4); left: 1px; border: 2px solid black; top: 1px;">Quitter le jeu</div>
       
-
-    </div>
-    <div class="select2">
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(20, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle4" />
-        <!-- Segments -->
-        <g class="segments4">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="62" text-anchor="middle" class="chip-number">20</text>
-      </svg>
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(50, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle5" />
-        <!-- Segments -->
-        <g class="segments5">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="62" text-anchor="middle" class="chip-number">50</text>
-      </svg>
-      <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(99, 'rgba(0, 191, 255, 0.8)')">
-        <!-- Outer Circle -->
-        <circle cx="50" cy="50" r="45" class="outer-circle" />
-        <!-- Inner Circle -->
-        <circle cx="50" cy="50" r="30" class="inner-circle6" />
-        <!-- Segments -->
-        <g class="segments6">
-          <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
-          <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
-        </g>
-        <!-- Number in the Center -->
-        <text x="49" y="59" text-anchor="middle" class="chip-number2">MAX</text>
-      </svg>
-    </div>
-
-    <div class="roulette-img" [routerLink]="['/roulette']" style="cursor: pointer;"></div>
-    <div class="creditcontainer">
-      <button class="hide-button" (click)="toggleCreditBlur()"><img src="../../../assets/image/oeuil.png" alt="Toggle Blur"></button>
-      <p class="p-credit" >Crédits <br>disponibles : </p> <p class="p-credit2" [ngClass]="{ 'blurred': isCreditBlurred }">{{ credit }}€</p>
+      <div style="position: absolute; right: 1px; top: 1px; display: flex;">
+       
+        <div class="btn"  style="font-weight:bold; cursor:pointer; background-color: rgba(39, 255, 104, 0.4); border: 2px solid black; margin-right: 5px;" (click)="openCloseTchat()">
+          <i class="bi bi-chat-text-fill" style="font-size: 110%;"></i>
+        </div>
+        
+        <div class="btn" [routerLink]="['/credit']" style="font-weight:bold; cursor:pointer; background-color: rgba(39, 255, 104, 0.4); border: 2px solid black;">
+          <i class="bi bi-person-fill" style="font-size: 110%;"></i>
+        </div>
+      </div>
+      
+      <p class="p-numérochaud">Vous êtes dans le salon n° {{ PLAYERINFO.salonNumber }}</p>
+      
+    
+      <p class="p-numérochaud">Vous êtes dans le salon n° {{ PLAYERINFO.salonNumber }}</p> 
     </div>
     
-  
+    <!--<div class="roulette-component">
+      <div class="roulette-img" [routerLink]="['/roulette']" style="cursor: pointer;">
+        <p>Lancer la roulette !</p>
+      </div>
+    </div>-->
 
-</div>
+    <div class="tchat" *ngIf="PLAYERINFO.tchatOpen">
+      <div class="tchat-list" #chatList>
+        <div *ngFor="let message of PLAYERINFO.chatMessages" class="tchatmessage">
+          {{ message }}
+        </div>
+      </div>
+      <div class="tchat-input">
+        <input type="text" placeholder="Écrire un message..." [(ngModel)]="PLAYERINFO.messageInput" (keydown.enter)="envoyerUnMessage()">
+        <button (click)="envoyerUnMessage()">Envoyer</button> 
+      </div>
+    </div>
+    
+    
+    
+    
+  
+    <div class="fond"></div>
+
+    <div class="bubulle"><img src="../../../assets/image/bull.png"><p>Faîtes vos jeux !</p><div class="container">
+     <button (click)="getPedro()" style="    background: rgba(76, 175, 80, 0.0);
+      
+     border: none;"> <div class="circle-background">
+        <div class="circle-progress" [ngStyle]="{ 'background': 'conic-gradient(#78C000 ' + progress + '%, transparent ' + progress + '%)' }">
+        </div>
+        <div class="circle-inner">
+          <div class="timer">{{ currentTime }} s</div>
+        </div>
+      </div>
+   </button>
+    </div>
+     
+    </div>
+    
+
+    <div class="table-component">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td rowspan="3" id="0" class="O" (click)="onCellClick($event)">0</td>
+            <td id="3" class="rouge" (click)="onCellClick($event)">3</td>
+            <td id="6" class="noir" (click)="onCellClick($event)">6</td>
+            <td id="9" class="rouge" (click)="onCellClick($event)">9</td>
+            <td id="12" class="rouge" (click)="onCellClick($event)">12</td>
+            <td id="15" class="noir" (click)="onCellClick($event)">15</td>
+            <td id="18" class="rouge" (click)="onCellClick($event)">18</td>
+            <td id="21" class="rouge" (click)="onCellClick($event)">21</td>
+            <td id="24" class="noir" (click)="onCellClick($event)">24</td>
+            <td id="27" class="rouge" (click)="onCellClick($event)">27</td>
+            <td id="30" class="rouge" (click)="onCellClick($event)">30</td>
+            <td id="33" class="noir" (click)="onCellClick($event)">33</td>
+            <td id="36" class="rouge" (click)="onCellClick($event)">36</td>
+            <td id="ligne1" class="lg" (click)="onCellClick($event)">ligne1</td>
+          </tr>
+          <tr>
+            <td id="2" class="noir" (click)="onCellClick($event)">2</td>
+            <td id="5" class="rouge" (click)="onCellClick($event)">5</td>
+            <td id="8" class="noir" (click)="onCellClick($event)">8</td>
+            <td id="11" class="noir" (click)="onCellClick($event)">11</td>
+            <td id="14" class="rouge" (click)="onCellClick($event)">14</td>
+            <td id="17" class="noir" (click)="onCellClick($event)">17</td>
+            <td id="20" class="noir" (click)="onCellClick($event)">20</td>
+            <td id="23" class="rouge" (click)="onCellClick($event)">23</td>
+            <td id="26" class="noir" (click)="onCellClick($event)">26</td>
+            <td id="29" class="noir" (click)="onCellClick($event)">29</td>
+            <td id="32" class="rouge" (click)="onCellClick($event)">32</td>
+            <td id="35" class="noir" (click)="onCellClick($event)">35</td>
+            <td id="ligne2" class="lg" (click)="onCellClick($event)">ligne2</td>
+          </tr>
+          <tr>
+            <td id="1" class="rouge" (click)="onCellClick($event)">1</td>
+            <td id="4" class="noir" (click)="onCellClick($event)">4</td>
+            <td id="7" class="rouge" (click)="onCellClick($event)">7</td>
+            <td id="10" class="noir" (click)="onCellClick($event)">10</td>
+            <td id="13" class="noir" (click)="onCellClick($event)">13</td>
+            <td id="16" class="rouge" (click)="onCellClick($event)">16</td>
+            <td id="19" class="rouge" (click)="onCellClick($event)">19</td>
+            <td id="22" class="noir" (click)="onCellClick($event)">22</td>
+            <td id="25" class="rouge" (click)="onCellClick($event)">25</td>
+            <td id="28" class="noir" (click)="onCellClick($event)">28</td>
+            <td id="31" class="noir" (click)="onCellClick($event)">31</td>
+            <td id="34" class="rouge" (click)="onCellClick($event)">34</td>
+            <td id="ligne3" class="lg" (click)="onCellClick($event)">ligne3</td>
+          </tr>
+          <tr>
+            <td class="btn-bonus" (click)="toggleBonus()">Bonus<div [ngClass]="{ 'active': isBonusActive, 'inactive': !isBonusActive }">
+              {{ isBonusActive ? 'ON' : 'OFF' }}
+            </div></td>
+
+            
+            <td colspan="4" id="tiers1" class="lg" (click)="onCellClick($event)">tiers1</td>
+            <td colspan="4" id="tiers2" class="lg" (click)="onCellClick($event)">tiers2</td>
+            <td colspan="4" id="tiers3" class="lg" (click)="onCellClick($event)">tiers3</td>
+            <td class="empty"></td>
+          </tr>
+          <tr>
+            <td class="empty"></td>
+            <td colspan="2" id="low" class="lg" (click)="onCellClick($event)">low</td>
+            <td colspan="2" id="even" class="lg" (click)="onCellClick($event)">even</td>
+            <td colspan="2" id="red" class="rouge" (click)="onCellClick($event)">red</td>
+            <td colspan="2" id="black" class="noir" (click)="onCellClick($event)">black</td>
+            <td colspan="2" id="odd" class="lg" (click)="onCellClick($event)">odd</td>
+            <td colspan="2" id="high" class="lg" (click)="onCellClick($event)">high</td>
+            <td class="empty"></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+      <div class="select1">
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(1, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle1" />
+          <!-- Segments -->
+          <g class="segments1">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="62" text-anchor="middle" class="chip-number">1</text>
+        </svg>
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(5, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle2" />
+          <!-- Segments -->
+          <g class="segments2">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="62" text-anchor="middle" class="chip-number">5</text>
+        </svg>
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(10, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle3" />
+          <!-- Segments -->
+          <g class="segments3">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="62" text-anchor="middle" class="chip-number">10</text>
+        </svg>
+      </div>
+      <div class="btn-option">
+
+        <button class="back-button" (click)="onUndoLastAction()" ><img src="../../../assets/image/back.png" class="btn-im"><h2> &nbsp;Annuler <br>&nbsp;le dernier<br>&nbsp;placement</h2></button>
+        <button class="back-button" (click)="onRemoveAllTokens()"><img src="../../../assets/image/annul.png" class="btn-im"><h2>&nbsp;&nbsp;Annuler<br>&nbsp;tous les <br>paris</h2></button>
+        <button class="replay-button" (click)="onReplayLastBet()">
+          <img src="../../../assets/image/rejouer.png" class="btn-im">
+          <h2>Rejouer <br> le pari <br> précédent</h2>
+        </button>
+        
+
+      </div>
+      <div class="select2">
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(20, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle4" />
+          <!-- Segments -->
+          <g class="segments4">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="62" text-anchor="middle" class="chip-number">20</text>
+        </svg>
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(50, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle5" />
+          <!-- Segments -->
+          <g class="segments5">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="62" text-anchor="middle" class="chip-number">50</text>
+        </svg>
+        <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(99, 'rgba(0, 191, 255, 0.8)')">
+          <!-- Outer Circle -->
+          <circle cx="50" cy="50" r="45" class="outer-circle" />
+          <!-- Inner Circle -->
+          <circle cx="50" cy="50" r="30" class="inner-circle6" />
+          <!-- Segments -->
+          <g class="segments6">
+            <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(90 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(135 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(180 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(225 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
+            <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
+          </g>
+          <!-- Number in the Center -->
+          <text x="49" y="59" text-anchor="middle" class="chip-number2">MAX</text>
+        </svg>
+      </div>
+
+      <div class="roulette-img" style="cursor: pointer;"></div>
+      <div class="creditcontainer">
+        <button class="hide-button" (click)="toggleCreditBlur()"><img src="../../../assets/image/oeuil.png" alt="Toggle Blur"></button>
+        <p class="p-credit" >Crédits <br>disponibles : </p> <p class="p-credit2" [ngClass]="{ 'blurred': isCreditBlurred }">{{ credit }}€</p>
+      </div>
+      
+  </div>
+  
   <div *ngIf="openReloadCredit" class="modal-overlay">
       <div class="modal-content">
         <h2>Vous avez atteint 0 crédit. Vous en récupérez 100 !</h2>

@@ -37,7 +37,7 @@
             <input type="password" id="password" name="password" [(ngModel)]="Password" required>
           </div>
         </div>
-        <p>Vous avez déjà un compte ? <br><a href="">Connectez-vous</a></p>
+        <p>Vous avez déjà un compte ? <br><a [routerLink]="['/login']">Connectez-vous</a></p>
         <button class="btn btn-warning" [disabled]="!isFormValid()" type="submit">Envoyer</button>
       </form>
     </div>

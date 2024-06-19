@@ -27,6 +27,7 @@
             "styles": [
               
               "src/assets/bootstrap-5.3.3-dist/css/bootstrap.min.css",
+              "src/assets/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css",
               
               "src/styles.css"
             ],

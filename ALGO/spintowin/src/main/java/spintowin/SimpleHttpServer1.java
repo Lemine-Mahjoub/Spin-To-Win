@@ -409,7 +409,7 @@ class PlayerHandlerNew implements HttpHandler {
 
                 @Override
                 public void handle(HttpExchange exchange) throws IOException {
-                    if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+                	if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
                         Utils.setCorsHeaders(exchange);
                         exchange.sendResponseHeaders(200, -1);
                         return;
@@ -428,12 +428,18 @@ class PlayerHandlerNew implements HttpHandler {
                     int ballNumber = jsonNode.get("ballNumber").asInt();
                     List<Bet> bets = new ArrayList<>();
                     JsonNode betsNode = jsonNode.get("bets");
+                    boolean hasBonusBet = false;
+
                     if (betsNode.isArray()) {
                         for (JsonNode betNode : betsNode) {
-                            int amount = betNode.get("amount").asInt();
                             String betType = betNode.get("betType").asText();
-                            Bet bet = new Bet(amount, betType);
-                            bets.add(bet);
+                            if (betType.equals("bonus")) {
+                                hasBonusBet = true;
+                            } else {
+                                int amount = betNode.get("amount").asInt();
+                                Bet bet = new Bet(amount, betType);
+                                bets.add(bet);
+                            }
                         }
                     }
 
@@ -449,7 +455,12 @@ class PlayerHandlerNew implements HttpHandler {
                         player.placeBet(bet);
                     }
 
-                    // Jouer une ronde avec le numéro de ball spécifié
+                    // Handle the bonus bet if present
+                    if (hasBonusBet) {
+                        player.placeBet(new Bet("bonus"));
+                    }
+
+                    // Simulate the round with the ball number
                     game.playRound(ballNumber);
 
                     // Récupérer le joueur mis à jour par son nom

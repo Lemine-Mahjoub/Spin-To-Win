@@ -1,55 +1,70 @@
 <!-- roulette.component.html -->
 <div class="body">
   <h2 *ngIf="PLAYERINFO.tableauparie?.length === 0" class="partieEnCours">Une partie est en cours, attendez le prochain tour pour jouer !</h2>
-  <div *ngIf="ballFalling == null" class="container-roulette">
-    <svg width="600" height="600" viewBox="-100 -100 200 200">
-      <g transform="rotate(-90)">
-        <path *ngFor="let path of paths; let i = index"
-              [attr.d]="path"
-              [attr.fill]="'hsl(' + i * 10 + ', 100%, 50%)'"
-              [attr.id]="tab[i]"></path>
-        <circle #ball cx="3" cy="-70" r="3" fill="white"></circle>
-      </g>
-      <!-- Image avec animation de rotation -->
-      <g transform="rotate(-90)">
-        <g transform="translate(0 0)">
-          <image *ngIf="PLAYERINFO.pedro" class="PEDROIMG" xlink:href="../../../assets/image/PEDRO.png" width="140" height="140" x="-70" y="-70">
-            <!-- Animation de rotation de l'image -->
-            <animateTransform attributeName="transform"
-                               attributeType="XML"
-                               type="rotate"
-                               from="0 0 0"
-                               to="360 0 0"
-                               dur="20s"
-                               repeatCount="indefinite"/>
-          </image>
-        </g>
-      </g>
-    </svg>
-    <audio *ngIf="PLAYERINFO.pedro" autoplay loop>
-      <source src="../../../assets/audio/pedropedroAudio.mp3" type="audio/mpeg">
-      Votre navigateur ne supporte pas l'audio HTML5.
-    </audio>
-  </div>
+<div *ngIf="ballFalling == null" class="container-roulette">
+  <svg width="600" height="600" viewBox="-100 -100 200 200">
+    <g transform="rotate(-90)">
+      <path *ngFor="let path of paths; let i = index"
+            [attr.d]="path"
+            [attr.fill]="'hsl(' + i * 10 + ', 100%, 50%)'"
+            [attr.id]="tab[i]"></path>
+      <circle #ball cx="3" cy="-70" r="3" fill="white"></circle>
+    </g>
+    <!-- Image avec animation de rotation -->
+    <g transform="rotate(-90)">
+      <g transform="translate(0 0)">
+        <image *ngIf="PLAYERINFO.pedro" class="PEDROIMG" xlink:href="../../../assets/image/PEDRO.png" width="140" height="140" x="-70" y="-70">
+          <!-- Animation de rotation de l'image -->
+          <animateTransform attributeName="transform"
+                             attributeType="XML"
+                             type="rotate"
+                             from="0 0 0"
+                             to="360 0 0"
+                             dur="7s"
+                             repeatCount="indefinite"/>
+        </image>
+      </g> 
+    </g>
+  
+  </svg>
+  <audio *ngIf="PLAYERINFO.pedro" autoplay loop>
+    <source src="../../../assets/audio/pedropedroAudio.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'audio HTML5.
+  </audio>
+</div> 
 
-  <div *ngIf="ballFalling !== null" class="resultat">
-
-    <div *ngIf="isCreditInGreen()" class="resultat resultat-vert">
-      <p class="numres">{{ ballFalling }}</p>
+<div *ngIf="ballFalling !== null" class="resultat">
+  <div *ngIf="isCreditInGreen()" class="resultat resultat-vert">
+    <p class="numres">{{ ballFalling }}</p>
   </div>
   <div *ngIf="isCreditInBlack()" class="resultat resultat-noir">
-      <p class="numres">{{ ballFalling }}</p>
+    <p class="numres">{{ ballFalling }}</p>
   </div>
   <div *ngIf="isCreditInRed()" class="resultat resultat-rouge">
-      <p class="numres">{{ ballFalling }}</p>
+    <p class="numres">{{ ballFalling }}</p>
   </div>
   
-    <p class="gain" *ngIf="getCreditDifference() > 0">Vous avez gagné {{ getCreditDifference() }} crédit !</p>
-    <p class="gain" *ngIf="getCreditDifference() > 1">Vous avez gagné {{ getCreditDifference() }} crédits !</p>
-    <p class="gain" *ngIf="getCreditDifference() < 0">Vous avez perdu {{ -getCreditDifference() }} crédit.</p>
-    <p class="gain" *ngIf="getCreditDifference() < -1">Vous avez perdu {{ -getCreditDifference() }} crédits.</p>
-    <p class="gain" *ngIf="getCreditDifference() === 0">Votre crédit n'a pas bougé.</p>
+  <p class="gain" *ngIf="getCreditDifference() > 0 && getCreditDifference() <= 1">Vous avez gagné {{ getCreditDifference() }} crédit !</p>
+  <p class="gain" *ngIf="getCreditDifference() > 1">Vous avez gagné {{ getCreditDifference() }} crédits !</p>
+  <p class="gain" *ngIf="getCreditDifference() < 0 && getCreditDifference() >= -1">Vous avez perdu {{ -getCreditDifference() }} crédit.</p>
+  <p class="gain" *ngIf="getCreditDifference() < -1">Vous avez perdu {{ -getCreditDifference() }} crédits.</p>
+  <p class="gain" *ngIf="getCreditDifference() === 0">Votre crédit n'a pas bougé.</p>
 
-    <p class="warn">Préparez vous pour le prochain tour</p>
+  <p class="warn">Préparez-vous pour le prochain tour</p>
+</div>
+
+
+
+<div class="tchat" *ngIf="PLAYERINFO.tchatOpen">
+  <div class="tchat-list" #chatList>
+    <div *ngFor="let message of PLAYERINFO.chatMessages" class="tchatmessage">
+      {{ message }}
+    </div>
   </div>
+  <div class="tchat-input">
+    <input type="text" placeholder="Écrire un message..." [(ngModel)]="PLAYERINFO.messageInput" (keydown.enter)="envoyerUnMessage()">
+    <button (click)="envoyerUnMessage()">Envoyer</button> 
+  </div>
+</div>
+  
 </div>

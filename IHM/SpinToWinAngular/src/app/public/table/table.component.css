@@ -2,6 +2,9 @@
     user-select: none;
 }
 
+
+
+
 .body {
     position: fixed;
     top: 0;
@@ -630,3 +633,94 @@ h2{
     background-color: #e69500; /* Changement de couleur au survol */
     cursor: pointer; /* Curseur pointeur */
   }
+
+
+  .tchat {
+    position: fixed;
+    top: 5%;
+    right: 0;
+    width: 40%;
+    height: 40%;
+    border: 3px solid #0738a1;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: rgba(230, 149, 0, 0.5); /* Couleur de fond avec opacité */
+    color: black;
+    display: flex;
+    flex-direction: column; /* Affichage en colonne pour empiler les éléments */
+  }
+  
+  /* Personnalisation de la barre de défilement */
+  .tchat::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  .tchat::-webkit-scrollbar-track {
+    background: transparent; /* Couleur de l'arrière-plan de la piste */
+  }
+  
+  .tchat::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Couleur de la barre de défilement */
+    border-radius: 10px; /* Optionnel : ajoute des coins arrondis */
+  }
+  
+  .tchat-list {
+    flex: 1; /* Permet à la liste des messages de prendre toute la hauteur disponible */
+    max-height: calc(100% - 50px); /* Hauteur maximale moins la zone de saisie */
+    overflow-y: auto;
+  }
+  
+  /* Personnalisation de la barre de défilement dans la liste */
+  .tchat-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .tchat-list::-webkit-scrollbar-track {
+    background: transparent; /* Couleur de l'arrière-plan de la piste */
+  }
+  
+  .tchat-list::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Couleur de la barre de défilement */
+    border-radius: 10px; /* Optionnel : ajoute des coins arrondis */
+  }
+  
+  .tchat-input {
+    margin-top: 10px;
+    display: flex;
+    align-items: center; /* Centre les éléments verticalement */
+  }
+  
+  .tchat-input input[type="text"] {
+    flex: 1; /* L'input prend autant d'espace que possible */
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #cccccc00;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .tchat-input button {
+    width: 25%;
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px; /* Espacement entre l'input et le bouton */
+  }
+  
+  .tchat-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  .tchatmessage {
+    /* Style spécifique pour chaque message dans la liste */
+    margin-bottom: 10px; /* Espacement entre les messages */
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

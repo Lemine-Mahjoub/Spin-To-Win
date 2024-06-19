@@ -1,14 +1,16 @@
-
 package WebGestion;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.java_websocket.WebSocket;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Salon {
     private static int count = 0;
     private int numero;
     private List<WebSocket> joueurs;
+    private static LinkedList<String> chatMessages = new LinkedList<>(); // Messages de chat partagés par tous les salons
 
     public Salon() {
         this.numero = ++count;
@@ -31,12 +33,23 @@ public class Salon {
         return numero;
     }
 
-    // Méthode pour accéder à la liste des joueurs
     public List<WebSocket> getJoueurs() {
         return joueurs;
     }
 
-    // Méthode pour envoyer un message à tous les joueurs du salon
+    public static LinkedList<String> getChatMessages() {
+        return chatMessages;
+    }
+
+    public static void addChatMessage(String message) {
+        if (chatMessages.size() >= 50) {
+            chatMessages.removeFirst();
+           
+        }
+        chatMessages.add(message);
+        
+    }
+
     public void broadcast(String message) {
         for (WebSocket joueur : joueurs) {
             joueur.send(message);

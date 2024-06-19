@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { PlayoutComponent } from '../playout/playout.component';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -26,11 +26,14 @@ export class TableComponent implements OnInit  {
   previousSelectedTokenElement: HTMLElement | null = null;
   isCreditBlurred: boolean = false; 
   openReloadCredit: boolean = false;
+ 
   private allServerURL = 'http://localhost:8000/player/update';
+ 
   subscription: any;
 oldCredit : number | undefined;
   isBonusActive: boolean = false; // Ajout de la variable pour l'état du bouton
   lastBet: { [key: string]: { count: number, color: string } } | null = null;
+  
   constructor(public PLAYERINFO: PlayoutComponent, private elRef: ElementRef, private httpClient: HttpClient, private router: Router, private webSocketService: WebSocketService) {
  
   
@@ -46,7 +49,8 @@ oldCredit : number | undefined;
 
   ngOnInit() {
     
-    if(!this.PLAYERINFO.joueurConnecter){this.router.navigate(['/login']);}
+    //if(!this.PLAYERINFO.joueurConnecter){this.router.navigate(['/login']);}
+    
     // Vérifiez si vous êtes actuellement sur la page de la table
     if (this.router.url === '/table') {
       // Abonnez-vous uniquement aux changements de l'état de partie si vous êtes sur la page de la table
@@ -206,9 +210,7 @@ oldCredit : number | undefined;
     }*/
   }
 
-  toggleBonus() {
-    this.isBonusActive = !this.isBonusActive;
-  } 
+
 
   updateCellDisplay(cellId: string) {
     const cell = document.getElementById(cellId);
@@ -327,6 +329,7 @@ oldCredit : number | undefined;
   }
 
   onUndoLastAction() {
+    console.log("toto")
     const lastAction = this.actionHistory.pop();
     if (lastAction) {
       const { cellId, previousCount, previousColor, tokenValue } = lastAction;
@@ -340,14 +343,26 @@ oldCredit : number | undefined;
   }
 
   logTokensData() {
+    console.log("totoo")
+    // Map the cellTokens to tableauparie
     this.PLAYERINFO.tableauparie = Object.entries(this.cellTokens).map(([key, value]) => {
-        return {
-            betType: value.originalContent,
-            amount: value.count
-        };
+      return {
+        betType: value.originalContent,
+        amount: value.count
+      };
     });
-
+  
+    // Add bonus bet if isBonusActive is true
+    if (this.isBonusActive) {
+      this.PLAYERINFO.tableauparie.push({ betType: 'bonus', amount: 0 });
+    }
+  
     console.table(this.PLAYERINFO.tableauparie);
+  }
+  
+  toggleBonus() {
+    this.isBonusActive = !this.isBonusActive;
+    this.logTokensData(); // Log the bets including the bonus bet when toggled
   }
 
   toggleCreditBlur() {
@@ -388,4 +403,47 @@ oldCredit : number | undefined;
       );
   }
  
+  envoyerUnMessage() {
+    if (this.PLAYERINFO.messageInput.trim() !== '') {
+      const pseudo = this.PLAYERINFO.playerInfo?.pseudo;
+      if (pseudo) {
+        const messageToSend = pseudo + " | " + this.PLAYERINFO.messageInput;
+        console.log('Message to send:', messageToSend);
+        this.PLAYERINFO.sendMessage(messageToSend);
+        this.PLAYERINFO.messageInput = '';
+      } else {
+        console.error('Player pseudo is not defined');
+      }
+    }
+  }
+  @ViewChild('chatList') chatList!: ElementRef;
+
+  private scrollToBottom(): void {
+    try {
+      this.chatList.nativeElement.scrollTop = this.chatList.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Error scrolling chat list to bottom:', err);
+    }
+  }
+ ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  envoyerUnMessageDepuisLogin() {
+    if (this.PLAYERINFO) {
+      this.PLAYERINFO.sendTotoMessage();
+    }
+  }
+
+  afficherLeTchatDepuisLogin() {
+    if (this.PLAYERINFO) {
+      this.PLAYERINFO.displayChatMessages();
+    }
+  }
+
+ 
+
+  openCloseTchat(){
+    this.PLAYERINFO.tchatOpen = !this.PLAYERINFO.tchatOpen;
+     
+  }
 }

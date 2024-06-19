@@ -20,7 +20,6 @@ public class SalonWebSocketServer extends WebSocketServer {
         this.salons = new ArrayList<>();
         this.etatPartie = 1;
 
-        // Planifier le changement d'état de la partie
         Timer etatTimer = new Timer();
         etatTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -35,7 +34,6 @@ public class SalonWebSocketServer extends WebSocketServer {
             etatPartie = 2;
             System.out.println("Etat de la partie changé à 2");
             generateAndSendNumbers();
-            // Replanifier le changement d'état à 1 après 15 secondes
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -52,9 +50,8 @@ public class SalonWebSocketServer extends WebSocketServer {
             int randomNum = RandomNumber.generateNumber();
             System.out.println("Nouveau numéro de salon généré pour le salon " + salon.getNumero() + " : " + randomNum);
 
-            // Envoyer le numéro aléatoire, l'identifiant du salon et l'état de la partie aux clients connectés
             String salonData = "{\"NbAlea\": " + randomNum + ", \"salonId\": " + salon.getNumero() + ", \"etatPartie\": " + etatPartie + "}";
-            salon.broadcast(salonData); // Méthode pour envoyer des données à tous les clients du salon
+            salon.broadcast(salonData);
         }
     }
 
@@ -63,7 +60,7 @@ public class SalonWebSocketServer extends WebSocketServer {
         for (Salon salon : salons) {
             int salonId = salon.getNumero();
             String data = "{\"salonId\": " + salonId + ", \"etatPartie\": " + etatPartie + "}";
-            salon.broadcast(data); // Envoyer l'état de la partie et le numéro du salon à tous les clients
+            salon.broadcast(data);
         }
     }
 
@@ -76,20 +73,17 @@ public class SalonWebSocketServer extends WebSocketServer {
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         System.out.println("Nouvelle connexion de: " + conn.getRemoteSocketAddress());
 
-        // Trouver un salon avec de la place ou créer un nouveau salon
         Salon salonDisponible = trouverSalonDisponible();
         if (salonDisponible == null) {
             salonDisponible = creerNouveauSalon();
         }
 
-        // Ajouter le joueur au salon
         boolean ajoutReussi = salonDisponible.ajouterJoueur(conn);
         if (ajoutReussi) {
             System.out.println("Joueur ajouté au salon numéro " + salonDisponible.getNumero());
             envoyerNumeroSalon(conn, salonDisponible.getNumero());
         } else {
             System.out.println("Le salon est plein.");
-            // Gérer le cas où tous les salons sont pleins
         }
     }
 
@@ -116,7 +110,6 @@ public class SalonWebSocketServer extends WebSocketServer {
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         System.out.println("Connexion fermée par " + (remote ? "le client" : "le serveur") + ": " + reason);
 
-        // Retirer le joueur de tous les salons
         for (Salon salon : salons) {
             salon.retirerJoueur(conn);
         }
@@ -125,7 +118,16 @@ public class SalonWebSocketServer extends WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         System.out.println("Message reçu: " + message);
+        // Handle the message as a chat message
+        for (Salon salon : salons) {
+            if (salon.getJoueurs().contains(conn)) {
+                Salon.addChatMessage(message); // Ajouter le message au chatMessages partagé
+                salon.broadcast(message);
+                break;
+            }
+        }
     }
+
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
@@ -133,8 +135,10 @@ public class SalonWebSocketServer extends WebSocketServer {
     }
 
     public static void main(String[] args) {
+ 
         InetSocketAddress socketAddress = new InetSocketAddress(8888);
         SalonWebSocketServer server = new SalonWebSocketServer(socketAddress); // Utiliser le port 8888
+ 
         server.start();
     }
 }

@@ -15,9 +15,12 @@ export class LoginComponent {
     private router: Router // Injectez le service Router
   ) {}
 
+ 
   private allServerURL = 'http://localhost:8000/player/auth';
+
   username: string = '';
   password: string = '';
+  
 
   sendData(): void {
     const username = (document.getElementById('username') as HTMLInputElement).value;
@@ -56,7 +59,17 @@ export class LoginComponent {
       );
   }
  
+  envoyerUnMessageDepuisLogin() {
+    if (this.PLAYERINFO) {
+      this.PLAYERINFO.sendTotoMessage();
+    }
+  }
 
+  afficherLeTchatDepuisLogin() {
+    if (this.PLAYERINFO) {
+      this.PLAYERINFO.displayChatMessages();
+    }
+  }
 
   // // Méthode pour récupérer toutes les données du serveur
   // getAllServers() {

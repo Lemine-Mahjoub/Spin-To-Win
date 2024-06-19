@@ -8,9 +8,14 @@
 			<input type="text" id="username" name="username" [(ngModel)]="username">
 			<label for="password">Password</label>
 			<input type="password" id="password" name="password" [(ngModel)]="password">
-			<a href="">Mot de passe oublié</a>
-			<br>
+			<p>Vous n'avez pas compte ? <br><a [routerLink]="['/register']">Inscrivez-vous</a></p>
+       		 
+			 
 			<button class="btn btn-warning" (click)="sendData()">Envoyer les données</button>
+			
+			
+		  
+    
 		</form>
 	</div>
 </div>
