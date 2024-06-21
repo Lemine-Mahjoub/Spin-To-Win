@@ -15,7 +15,7 @@ export class LoginComponent {
     private router: Router // Injectez le service Router
   ) {}
 
-  private allServerURL = 'http://valentin:8000/player/auth';
+  private allServerURL = 'http://10.22.27.51:8000/player/auth';
   username: string = '';
   password: string = '';
   loginError: boolean = false; // Ajoutez cette ligne
