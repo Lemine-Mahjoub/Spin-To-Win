@@ -286,10 +286,14 @@ export class TableComponent implements OnInit {
   // Gestion de l'affichage de Pedro
   getPedro() {
     this.PLAYERINFO.pedro = !this.PLAYERINFO.pedro;
-    console.log("pedro");
-    console.log(this.PLAYERINFO.pedro);
+    this.PLAYERINFO.fede = false;
+    
   }
-
+  getFede() {
+    this.PLAYERINFO.fede = !this.PLAYERINFO.fede;
+    this.PLAYERINFO.pedro = false;
+     
+  }
   // Suppression de tous les jetons
   onRemoveAllTokens() {
     Object.keys(this.cellTokens).forEach(cellId => {

@@ -9,7 +9,7 @@ import { WebSocketService } from '../web-socket.service';
   styleUrls: ['./playout.component.css']
 })
 export class PlayoutComponent implements OnInit {
-  
+  fede: boolean = false;
   playerInfo: any;
   pageCharger: number = 1;
   pedro: boolean = false;
