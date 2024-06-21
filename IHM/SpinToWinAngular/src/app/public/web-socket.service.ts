@@ -8,7 +8,7 @@ export class WebSocketService {
   private socket: WebSocket | null = null;
   private gameStateSubject: Subject<any> = new Subject<any>();
   private chatSubject: Subject<any> = new Subject<any>();
-  private url: string = 'ws://paul:8888';
+  private url: string = 'ws://10.22.27.51:8888';
 
   constructor() {}
 
