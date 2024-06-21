@@ -27,7 +27,7 @@ export class TableComponent implements OnInit {
   previousSelectedTokenElement: HTMLElement | null = null; // Élément du jeton précédemment sélectionné
   isCreditBlurred: boolean = false; // État pour flouter le crédit
   openReloadCredit: boolean = false; // État pour afficher le modal de rechargement de crédit
-  private allServerURL = 'http://10.22.27.51:8000/player/update'; // URL du serveur pour mettre à jour le crédit
+  private allServerURL = 'http://valentin:8000/player/update'; // URL du serveur pour mettre à jour le crédit
   subscription: any; // Subscription pour l'état de la partie
   oldCredit : number | undefined; // Ancien crédit du joueur
   isBonusActive: boolean = false; // État pour le bouton bonus
@@ -286,10 +286,14 @@ export class TableComponent implements OnInit {
   // Gestion de l'affichage de Pedro
   getPedro() {
     this.PLAYERINFO.pedro = !this.PLAYERINFO.pedro;
-    console.log("pedro");
-    console.log(this.PLAYERINFO.pedro);
+    this.PLAYERINFO.fede = false;
+    
   }
-
+  getFede() {
+    this.PLAYERINFO.fede = !this.PLAYERINFO.fede;
+    this.PLAYERINFO.pedro = false;
+     
+  }
   // Suppression de tous les jetons
   onRemoveAllTokens() {
     Object.keys(this.cellTokens).forEach(cellId => {

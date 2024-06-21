@@ -1,57 +1,62 @@
 <div class="body">
-
-  <!-- En tête, menu du haut -->
   <div class="numéro-chauds" style="position: relative;">
-    <!-- Bouton pour quitter le jeu, avec un lien de routage vers /Jeu -->
     <div class="btn" [routerLink]="['/Jeu']" style="font-weight:bold; cursor:pointer; position:absolute; background-color: rgba(39, 255, 104, 0.4); left: 1px; border: 2px solid black; top: 1px;">Quitter le jeu</div>
     
     <div style="position: absolute; right: 1px; top: 1px; display: flex;">
-      <!-- Bouton pour ouvrir/fermer le chat -->
+     
       <div class="btn"  style="font-weight:bold; cursor:pointer; background-color: rgba(39, 255, 104, 0.4); border: 2px solid black; margin-right: 5px;" (click)="openCloseTchat()">
         <i class="bi bi-chat-text-fill" style="font-size: 110%;"></i>
       </div>
-      <!-- Bouton pour accéder aux crédits, avec un lien de routage vers /credit -->
+      
       <div class="btn" [routerLink]="['/credit']" style="font-weight:bold; cursor:pointer; background-color: rgba(39, 255, 104, 0.4); border: 2px solid black;">
         <i class="bi bi-person-fill" style="font-size: 110%;"></i>
       </div>
     </div>
     
-    <!-- Nombre de joueurs dans le salon et numéro du salon de jeu -->
-    <p class="p-numérochaud">Vous êtes dans le salon n° {{ PLAYERINFO.salonNumber }}</p>
-    <p class="p-numérochaud">Vous êtes dans le salon n° {{ PLAYERINFO.salonNumber }}</p> 
+    <button (click)="getFede()"><p class="p-numérochaud">Vous êtes dans le salon n° {{ PLAYERINFO.salonNumber }} , Joueurs connectés  : {{ PLAYERINFO.nbJoueurs }}</p></button>
+    
+  
   </div>
   
-  <!-- Tchat en dessous du menu -->
+  <!--<div class="roulette-component">
+    <div class="roulette-img" [routerLink]="['/roulette']" style="cursor: pointer;">
+      <p>Lancer la roulette !</p>
+    </div>
+  </div>-->
+
   <div class="tchat" *ngIf="PLAYERINFO.tchatOpen">
     <div class="tchat-list" #chatList>
-      <!-- Affichage des messages du chat -->
       <div *ngFor="let message of PLAYERINFO.chatMessages" class="tchatmessage">
         {{ message }}
       </div>
     </div>
     <div class="tchat-input">
-      <!-- Champ de saisie pour envoyer un message -->
       <input type="text" placeholder="Écrire un message..." [(ngModel)]="PLAYERINFO.messageInput" (keydown.enter)="envoyerUnMessage()">
       <button (click)="envoyerUnMessage()">Envoyer</button> 
     </div>
   </div>
+  
+  
+  
+  
 
   <div class="fond"></div>
 
-  <!-- Bulle de message -->
-  <div class="bubulle"><img src="../../../assets/image/bull.png"><p>Faîtes vos jeux !</p></div>
+  <div class="bubulle"><button (click)="getPedro()"><img src="../../../assets/image/bull.png"><p>Faîtes vos jeux !</p></button>
+   <!--<button (click)="getPedro()" style="    background: rgba(76, 175, 80, 0.0);
+    
+   border: none;">--> 
+   
+  </div>
+  
 
-  <!-- Grande table de jeu -->
   <div class="table-component">
-    <!-- Barre du temps -->
     <div class="progress_bar">
       <div class="progress"></div>
     </div>
-    <!-- Les TD dans table correspondent aux cases de la table de jeu -->
     <table class="table">
       <tbody>
         <tr>
-          <!-- Première ligne de la table de jeu -->
           <td rowspan="3" id="0" class="O" (click)="onCellClick($event)">0</td>
           <td id="3" class="rouge" (click)="onCellClick($event)">3</td>
           <td id="6" class="noir" (click)="onCellClick($event)">6</td>
@@ -68,7 +73,6 @@
           <td id="ligne1" class="lg" (click)="onCellClick($event)">ligne1</td>
         </tr>
         <tr>
-          <!-- Deuxième ligne de la table de jeu -->
           <td id="2" class="noir" (click)="onCellClick($event)">2</td>
           <td id="5" class="rouge" (click)="onCellClick($event)">5</td>
           <td id="8" class="noir" (click)="onCellClick($event)">8</td>
@@ -84,7 +88,6 @@
           <td id="ligne2" class="lg" (click)="onCellClick($event)">ligne2</td>
         </tr>
         <tr>
-          <!-- Troisième ligne de la table de jeu -->
           <td id="1" class="rouge" (click)="onCellClick($event)">1</td>
           <td id="4" class="noir" (click)="onCellClick($event)">4</td>
           <td id="7" class="rouge" (click)="onCellClick($event)">7</td>
@@ -100,19 +103,17 @@
           <td id="ligne3" class="lg" (click)="onCellClick($event)">ligne3</td>
         </tr>
         <tr>
-          <!-- Ligne pour les boutons bonus et les cases tiers -->
-          <td class="btn-bonus" (click)="toggleBonus()">Bonus
-            <div [ngClass]="{ 'active': isBonusActive, 'inactive': !isBonusActive }">
-              {{ isBonusActive ? 'ON' : 'OFF' }}
-            </div>
-          </td>
+          <td class="btn-bonus" (click)="toggleBonus()">Bonus<div [ngClass]="{ 'active': isBonusActive, 'inactive': !isBonusActive }">
+            {{ isBonusActive ? 'ON' : 'OFF' }}
+          </div></td>
+
+          
           <td colspan="4" id="tiers1" class="lg" (click)="onCellClick($event)">tiers1</td>
           <td colspan="4" id="tiers2" class="lg" (click)="onCellClick($event)">tiers2</td>
           <td colspan="4" id="tiers3" class="lg" (click)="onCellClick($event)">tiers3</td>
           <td class="empty"></td>
         </tr>
         <tr>
-          <!-- Ligne pour les cases spéciales (low, even, red, black, odd, high) -->
           <td class="empty"></td>
           <td colspan="2" id="low" class="lg" (click)="onCellClick($event)">low</td>
           <td colspan="2" id="even" class="lg" (click)="onCellClick($event)">even</td>
@@ -125,12 +126,15 @@
       </tbody>
     </table>
 
-    <!-- Les SVG entourés de div correspondent aux jetons -->
+
+
     <div class="select1">
-      <!-- Jeton de valeur 1 -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(1, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle1" />
+        <!-- Segments -->
         <g class="segments1">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -141,12 +145,15 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="62" text-anchor="middle" class="chip-number">1</text>
       </svg>
-      <!-- Jeton de valeur 5 -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(5, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle2" />
+        <!-- Segments -->
         <g class="segments2">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -157,12 +164,15 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="62" text-anchor="middle" class="chip-number">5</text>
       </svg>
-      <!-- Jeton de valeur 10 -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(10, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle3" />
+        <!-- Segments -->
         <g class="segments3">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -173,22 +183,24 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="62" text-anchor="middle" class="chip-number">10</text>
       </svg>
     </div>
-    
     <div class="btn-option">
-      <!-- Bouton pour annuler la dernière action -->
-      <button class="back-button" (click)="onUndoLastAction()"><img src="../../../assets/image/back.png" class="btn-im"><h2> &nbsp;Annuler <br>&nbsp;le dernier<br>&nbsp;placement</h2></button>
-      <!-- Bouton pour annuler tous les paris -->
+
+      <button class="back-button" (click)="onUndoLastAction()" ><img src="../../../assets/image/back.png" class="btn-im"><h2> &nbsp;Annuler <br>&nbsp;le dernier<br>&nbsp;placement</h2></button>
       <button class="back-button" (click)="onRemoveAllTokens()"><img src="../../../assets/image/annul.png" class="btn-im"><h2>&nbsp;&nbsp;Annuler<br>&nbsp;tous les <br>paris</h2></button>
+      
+
     </div>
-    
     <div class="select2">
-      <!-- Jeton de valeur 20 -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(20, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle4" />
+        <!-- Segments -->
         <g class="segments4">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -199,12 +211,15 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="62" text-anchor="middle" class="chip-number">20</text>
       </svg>
-      <!-- Jeton de valeur 50 -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(50, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle5" />
+        <!-- Segments -->
         <g class="segments5">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -215,12 +230,15 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="62" text-anchor="middle" class="chip-number">50</text>
       </svg>
-      <!-- Jeton de valeur MAX -->
       <svg class="token" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" (click)="onTokenClick(99, 'rgba(0, 191, 255, 0.8)')">
+        <!-- Outer Circle -->
         <circle cx="50" cy="50" r="45" class="outer-circle" />
+        <!-- Inner Circle -->
         <circle cx="50" cy="50" r="30" class="inner-circle6" />
+        <!-- Segments -->
         <g class="segments6">
           <rect x="47" y="5" width="6" height="10" transform="rotate(0 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(45 50 50)" />
@@ -231,23 +249,20 @@
           <rect x="47" y="5" width="6" height="10" transform="rotate(270 50 50)" />
           <rect x="47" y="5" width="6" height="10" transform="rotate(315 50 50)" />
         </g>
+        <!-- Number in the Center -->
         <text x="49" y="59" text-anchor="middle" class="chip-number2">MAX</text>
       </svg>
     </div>
 
-    <!-- Image de roulette à droite de la table de jeu -->
     <div class="roulette-img"></div>
     <div class="creditcontainer">
-      <!-- Bouton pour basculer l'affichage flouté des crédits -->
       <button class="hide-button" (click)="toggleCreditBlur()"><img src="../../../assets/image/oeuil.png" alt="Toggle Blur"></button>
-      <!-- Affichage des crédits disponibles -->
-      <p class="p-credit">Crédits <br>disponibles : </p> 
-      <p class="p-credit2" [ngClass]="{ 'blurred': isCreditBlurred }">{{ credit }}€</p>
+      <p class="p-credit" >Crédits <br>disponibles : </p> <p class="p-credit2" [ngClass]="{ 'blurred': isCreditBlurred }">{{ credit }}€</p>
     </div>
-  </div>
+    
+</div>
 
-  <!-- Notification en cas de perte totale des crédits -->
-  <div *ngIf="openReloadCredit" class="modal-overlay">
+<div *ngIf="openReloadCredit" class="modal-overlay">
     <div class="modal-content">
       <h2>Vous n'avez plus de crédit<br> Nous vous créditons de 100 crédits</h2>
       <div class="btn btn-warning" (click)="reloadCredit();closeModal()" style="cursor: pointer;">
@@ -255,4 +270,3 @@
       </div>
     </div>
   </div>
-</div>

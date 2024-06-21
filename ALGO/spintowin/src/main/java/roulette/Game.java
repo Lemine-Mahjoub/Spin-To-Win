@@ -1,11 +1,11 @@
-package Game;
+package roulette;
 
 import java.util.ArrayList;
 import java.util.List;
-import Bet.Bet;
-import Player.Player;
-import Roulette.Roulette;
-import Color.Color;
+import roulette.Bet;
+import roulette.Player;
+import roulette.Roulette;
+import roulette.Color;
 
 public class Game {
     double bonusAmount = 0;
@@ -113,11 +113,11 @@ public class Game {
                 return 2 * bet.getAmount();
             }
         } else if (Roulette.TIERS.contains(bet.getTarget())) {
-            if (bet.getTarget().equals("tiers1") && winningNumber >= 1 et winningNumber <= 12) {
+            if (bet.getTarget().equals("tiers1") && winningNumber >= 1 && winningNumber <= 12) {
                 return 3 * bet.getAmount();
-            } else if (bet.getTarget().equals("tiers2") && winningNumber >= 13 et winningNumber <= 24) {
+            } else if (bet.getTarget().equals("tiers2") && winningNumber >= 13 && winningNumber <= 24) {
                 return 3 * bet.getAmount();
-            } else if (bet.getTarget().equals("tiers3") && winningNumber >= 25 et winningNumber <= 36) {
+            } else if (bet.getTarget().equals("tiers3") && winningNumber >= 25 && winningNumber <= 36) {
                 return 3 * bet.getAmount();
             }
         } else if (Roulette.LIGNES.contains(bet.getTarget())) {
