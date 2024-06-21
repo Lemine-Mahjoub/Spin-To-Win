@@ -29,11 +29,25 @@
                              dur="7s"
                              repeatCount="indefinite"/>
         </image>
+        <image *ngIf="PLAYERINFO.fede" class="PEDROIMG" xlink:href="../../../assets/image/fede.png" width="140" height="140" x="-70" y="-70">
+          <!-- Animation de rotation de l'image -->
+          <animateTransform attributeName="transform"
+                             attributeType="XML"
+                             type="rotate"
+                             from="0 0 0"
+                             to="360 0 0"
+                             dur="7s"
+                             repeatCount="indefinite"/>
+        </image>
       </g>
     </g>
   </svg>
   <audio *ngIf="PLAYERINFO.pedro" autoplay loop>
     <source src="../../../assets/audio/pedropedroAudio.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'audio HTML5.
+  </audio>
+  <audio *ngIf="PLAYERINFO.fede" autoplay loop>
+    <source src="../../../assets/audio/fedeAudio.mp3" type="audio/mpeg">
     Votre navigateur ne supporte pas l'audio HTML5.
   </audio>
 </div>
