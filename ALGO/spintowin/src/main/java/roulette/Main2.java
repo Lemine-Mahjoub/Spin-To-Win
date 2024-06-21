@@ -1,7 +1,7 @@
 package roulette;
 
 
-
+//main's test of Roulette maths
 public class Main2 {
 	 public static void main(String[] args) {
 	        Game game = new Game();
