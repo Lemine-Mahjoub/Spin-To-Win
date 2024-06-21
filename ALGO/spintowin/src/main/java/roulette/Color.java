@@ -1,5 +1,5 @@
 package roulette;
-
+//use in main2 to a better visualisation in test
 public class Color {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
