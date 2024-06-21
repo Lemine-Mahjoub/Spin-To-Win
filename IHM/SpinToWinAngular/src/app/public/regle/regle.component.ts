@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlayoutComponent } from '../playout/playout.component';
 
 @Component({
   selector: 'app-regle',
@@ -9,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class RegleComponent {
 
+  constructor(
+    public PLAYERINFO: PlayoutComponent,
+    
+  ) {
+    // Initialisation de la page
+    this.PLAYERINFO.pageCharger = 0;}
+     
 }

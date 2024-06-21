@@ -1,1 +1,30 @@
-<p>regle works!</p>
+<div id="bg">
+    <div class="background">
+    <div class="main-content">
+        <div class="content">
+            <button class="back-button" onclick="history.back()">Retour au jeu</button>
+            <h1>User's Guide</h1>
+            <img src="../../../assets/image/spintowin.png" alt="Spin To Win" class="stw-image">
+            <p>« SpinToWin » est un jeu de roulette en ligne. Un système de multijoueur est disponible afin de jouer à plusieurs sur la même table.</p>
+            <p>Le principe du jeu est une roulette européenne classique avec 5 mises possibles de 1, 2, 5, 10, 50, MAX.</p>
+            <p>Nous avons également ajouté une option de mise Bonus qui fait de SpinToWin un jeu original de VegaStudio.</p>
+            <h2>Différents paris</h2>
+            <h3>Paris Intérieurs</h3>
+            <p><strong>Numéro Plein (Straight Up) :</strong> Parier sur un seul numéro (payout de 35:1).</p>
+            <h3>Paris Extérieurs</h3>
+            <p><strong>Colonne (Column) :</strong> Parier sur l'une des trois colonnes de douze numéros (payout de 2:1).</p>
+            <p><strong>Douzaine (Dozen) :</strong> Parier sur l'un des trois groupes de douze numéros : 1-12, 13-24, 25-36 (payout de 2:1).</p>
+            <p><strong>Pair/Impair (Even/Odd) :</strong> Parier sur tous les numéros pairs ou impairs (payout de 1:1).</p>
+            <p><strong>Rouge/Noir (Red/Black) :</strong> Parier sur tous les numéros rouges ou noirs (payout de 1:1).</p>
+            <p><strong>Manque/Passe (Low/High) :</strong> Parier sur les numéros de 1 à 18 (Manque) ou de 19 à 36 (Passe) (payout de 1:1).</p>
+            <h2>Bonus</h2>
+            <p>La case Bonus est une case à activer, qui mise automatiquement un montant équivaut à la moitié du total de vos mises intérieures(numéros pleins). Un coefficient est appliqué à ce montant si un des numéros pleins misé est tombé, ce coefficient régresse automatiquement proportionnellement au nombre de numéros entiers joués, plus on joue de numéros, plus il est faible.</p>
+            <h3>Exemple</h3>
+            <p>Le joueur mise 3€ sur le "4" et 5€ sur le "7", il active également la case "Bonus".</p>
+            <p>Le montant de la case "Bonus" sera de 4€ ( (3€ + 5€ = 8€) / 2 = 4€).</p>
+            <p>Voici les coefficient appliqué au montant du Bonus : bonusAmount = ((36/pick)*0.48) * bonusAmount</p>
+            <p>Ainsi, si le "4" tombe, le joueur récupère 34 crédits grace au bonus sans compter les autres gains ((36/2)*0.48 * 4 = 34.56) </p>
+        </div>
+    </div>
+</div>
+</div>

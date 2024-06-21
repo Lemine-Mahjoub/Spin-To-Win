@@ -12,6 +12,7 @@ import { TableComponent } from './table/table.component';
 import { JeuComponent } from './jeu/jeu.component';
 import { ProposComponent } from './propos/propos.component';
 import { WebSocketComponent } from './web-socket/web-socket.component'; 
+import { RegleComponent } from './regle/regle.component';
 
 // Routage des pages du module Public 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'table', component: TableComponent }, // Charge le composant CreditComponent lorsque le chemin est '/table'  // Charge le composant CreditComponent lorsque le chemin est '/table'
      {path: 'Jeu', component: JeuComponent},
      {path: 'propos', component: ProposComponent},
+     {path: 'regle', component: RegleComponent},
     ]
   }
 ];
