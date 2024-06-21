@@ -124,7 +124,7 @@
     height: 100%;
     width: 0%;
     background-color: black;
-    transition: width 21.5s linear; /* La ligne noire s'agrandit pour cacher le dégradé et prend 21.5s à cacher le dégradé après avoir attendu 1 seconde avant de commencer l'animation */
+    transition: width 17s linear; /* La ligne noire s'agrandit pour cacher le dégradé et prend 21.5s à cacher le dégradé après avoir attendu 1 seconde avant de commencer l'animation */
 }
 
 /* Conteneur de crédits */

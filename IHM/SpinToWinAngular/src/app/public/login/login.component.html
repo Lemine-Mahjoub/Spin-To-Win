@@ -1,34 +1,20 @@
 <div id="bg">
-	<div class="opacity">
-	<div id="item" class="mx-auto">
-	  <div>
-		<h1>Connexion</h1>
-	  </div>
-	  <form>
-		<label for="username">Username</label>
-		<input type="text" id="username" name="username" [(ngModel)]="username">
-		<label for="password">Password</label>
-		<input type="password" id="password" name="password" [(ngModel)]="password">
-		<p>Vous n'avez pas de compte ? <br><a [routerLink]="['/register']">Inscrivez-vous</a></p>
-		<button class="btn btn-warning" (click)="sendData()">Envoyer les données</button>
-		<div *ngIf="loginError" style="color: red;text-align : center">
-		  Mauvais pseudo/mot de passe
-		</div> 
-		<form action> <!-- Début du formulaire -->
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username" [(ngModel)]="username">
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" [(ngModel)]="password">
-			<p>Vous n'avez pas compte ? <br><a [routerLink]="['/register']">Inscrivez-vous</a></p>
-       		 
-			 
-			<button class="btn btn-warning" (click)="sendData()">Envoyer les données</button>
-			
-			
-		  
-    
-		</form> <!-- Fin de formulaire -->
- 
-	</div>
+    <div class="opacity">
+    <div id="item" class="mx-auto">
+      <div>
+        <h1>Connexion</h1>
+      </div>
+      <form>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password">
+        <p>Vous n'avez pas de compte ? <br><a [routerLink]="['/register']">Inscrivez-vous</a></p>
+        <button class="btn btn-warning" (click)="sendData()">Envoyer les données</button>
+        <div *ngIf="loginError" style="color: red;text-align : center">
+          Mauvais pseudo/mot de passe
+        </div>
+      </form>
+    </div>
   </div>
   
