@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private httpClient: HttpClient, public PLAYERINFO: PlayoutComponent, private router: Router) {}
+  constructor(private httpClient: HttpClient, public PLAYERINFO: PlayoutComponent, private router: Router) {
+    this.PLAYERINFO.pageCharger = 1;
+  }
 
   pseudos: string[] = [];
   emails: string[] = [];
@@ -29,7 +31,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getAllEmails() {
-    const url = 'http://10.22.27.51:8000/player/mail';
+    const url = 'http://valentin:8000/player/mail';
     this.httpClient.get<string[]>(url).subscribe(
       (response: string[]) => {
         this.emails = response;
@@ -46,7 +48,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getAllPseudo() {
-    const url = 'http://10.22.27.51:8000/player/pseudo';
+    const url = 'http://valentin:8000/player/pseudo';
     this.httpClient.get<string[]>(url).subscribe(
       (response: string[]) => {
         this.pseudos = response;
@@ -104,7 +106,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const url = 'http://10.22.27.51:8000/player/new';
+    const url = 'http://valentin:8000/player/new';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let dateNaissanceISO: string | null = null;

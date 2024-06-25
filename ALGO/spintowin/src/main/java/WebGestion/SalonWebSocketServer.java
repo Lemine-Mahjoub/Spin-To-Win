@@ -148,7 +148,7 @@ public class SalonWebSocketServer extends WebSocketServer {
     }
 
     public static void main(String[] args) {
-        InetSocketAddress socketAddress = new InetSocketAddress("0.0.0.0", 8888);
+    	 InetSocketAddress socketAddress = new InetSocketAddress("0.0.0.0",8888);
         SalonWebSocketServer server = new SalonWebSocketServer(socketAddress);
         server.start();
     }
