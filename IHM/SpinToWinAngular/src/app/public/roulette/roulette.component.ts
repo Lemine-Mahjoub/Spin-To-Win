@@ -17,7 +17,7 @@ export class RouletteComponent implements OnInit, AfterViewInit, OnDestroy {
   tab = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
   ballFalling: number | null = null; 
   betscopy: any[] = []; 
-  private allServerURL = 'http://valentin:8000/game/playe';
+  private allServerURL = 'http://10.22.27.51:8000/game/playe';
   private subscription: Subscription | null = null;  // Ajout de la souscription
   
   @ViewChild("ball") ball!: ElementRef<SVGCircleElement>;
