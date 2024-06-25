@@ -27,7 +27,7 @@ public class SimpleHttpServer1 {
 
     public static void main(String[] args) throws IOException {
         // Créez le serveur HTTP sur le port 8000
-        server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8000), 0);
+        server = HttpServer.create(new InetSocketAddress("0.0.0.0",8000), 0);
 
         // Définissez les gestionnaires de requêtes pour les différents chemins
         server.createContext("/resource2", new Resource2Handler());

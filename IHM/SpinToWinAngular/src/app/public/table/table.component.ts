@@ -43,6 +43,7 @@ export class TableComponent implements OnInit {
   ) {
     // Initialisation de la page
     this.PLAYERINFO.pageCharger = 0;
+    if(!this.PLAYERINFO.joueurConnecter){this.router.navigate(['/login']);}
     if (this.PLAYERINFO.playerInfo && typeof this.PLAYERINFO.playerInfo.credit === 'number') {
       this.credit = this.PLAYERINFO.playerInfo.credit;
     }

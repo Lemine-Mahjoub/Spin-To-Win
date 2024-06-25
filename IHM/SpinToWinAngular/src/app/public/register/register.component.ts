@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private httpClient: HttpClient, public PLAYERINFO: PlayoutComponent, private router: Router) {}
+  constructor(private httpClient: HttpClient, public PLAYERINFO: PlayoutComponent, private router: Router) {
+    this.PLAYERINFO.pageCharger = 1;
+  }
 
   pseudos: string[] = [];
   emails: string[] = [];
